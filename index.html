@@ -181,12 +181,12 @@
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 2;
-  color: #ff00ff;
+  color: #ff00ff;   
   background: rgba(0, 0, 0, 0.8);
   font-size: 1.6vh; /* Adjusted from 16px to 1.6vh for relative sizing */
   text-align: center;
@@ -450,7 +450,7 @@ document.addEventListener('touchend', (e) => {
 
 document.addEventListener('touchend', (e) => {
   // Detect tap to fire weapon
-  const deltaTime = e.timeStamp - touchStartX;
+  const deltaTime = e.timeStamp - e.changedTouches[0].timeStamp;
   if (deltaTime < 300) {
     fireWeapon();
   }
@@ -725,9 +725,50 @@ function createExplosion(x, y) {
       finalScore.textContent = score;
     }
   
+    document.querySelector('#gameOverScreen button').addEventListener('click', restartGame);
+
     function restartGame() {
-      location.reload();
-    }
+  // Reset game state variables
+  score = 0;
+  health = 100;
+  currentWeapon = "2"; // Start with Laser
+  gamePaused = false;
+  gameOver = false;
+
+  // Update the UI elements
+  scoreDisplay.textContent = score;
+  healthDisplay.textContent = health;
+  weaponDisplay.textContent = weapons[currentWeapon].name;
+
+  // Hide the game over screen
+  // gameOverScreen.style.display = 'none';
+
+    // Hide the game over screen
+    document.getElementById('gameOverScreen').style.display = 'none';
+
+
+  // Reset the spaceship position
+  spaceship.style.left = '50%';
+  spaceship.style.transform = 'translateX(-50%)';
+
+  // Restart background music
+  bgMusic.currentTime = 0;
+  bgMusic.play();
+
+  // Restart enemy spawning
+  clearInterval(enemyIntervalId);
+  enemySpawnInterval = 1200; // Reset to initial interval
+  enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
+
+  // Restart power-ups spawning
+  setInterval(spawnPowerUp, 10000);
+}
+
+// Add event listener for the "Play Again" button
+document.querySelector('#gameOverScreen button').addEventListener('click', restartGame);
+document.querySelector('#gameOverScreen button').addEventListener('touchstart', restartGame);
+// Initialize the game
+initGame();
   
  
 
