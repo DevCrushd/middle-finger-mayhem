@@ -255,6 +255,7 @@
   </div>
 
   <!-- Audio Elements -->
+  <audio id="hitSound" src="https://crushdfitness.com/audio/9FartSound.mp3"></audio>
   <audio id="bgMusic" src="https://crushdfitness.com/audio/CASEOHsings12DaysOfFATmas.mp3" loop></audio>
   <audio id="shootSound" src="https://www.soundjay.com/mechanical/sounds/mechanical-2.mp3"></audio>
   <audio id="explosionSound" src="https://www.soundjay.com/explosion/sounds/explosion-02.mp3"></audio>
@@ -290,7 +291,8 @@
     const explosionSound  = document.getElementById('explosionSound');
     const powerupSound    = document.getElementById('powerupSound');
     const enemyAppearSound= document.getElementById('enemyAppearSound');
-  
+    const hitSound        = document.getElementById('hitSound'); // New hit sound
+
     /***********************************************************/
     /*                Random Color Overlay Setup               */
     /***********************************************************/
@@ -579,22 +581,25 @@ setInterval(spawnEnemy, 1000); // Adjust the interval as needed to control the d
       }, 100);
     }
   
-    /***********************************************************/
-    /*           Collision: Projectile vs Enemies             */
-    /***********************************************************/
-    function checkProjectileCollision(projectile) {
-      const enemies = document.querySelectorAll('.enemy');
-      enemies.forEach((enemy) => {
-        if (isColliding(projectile, enemy)) {
-          createExplosion(enemy.offsetLeft, enemy.offsetTop);
-          explosionSound.currentTime = 0;
-          explosionSound.play();
-          enemy.remove();
-          projectile.remove();
-          updateScore();
-        }
-      });
+   /***********************************************************/
+/*           Collision: Projectile vs Enemies             */
+/***********************************************************/
+function checkProjectileCollision(projectile) {
+  const enemies = document.querySelectorAll('.enemy');
+  enemies.forEach((enemy) => {
+    if (isColliding(projectile, enemy)) {
+      createExplosion(enemy.offsetLeft, enemy.offsetTop);
+      explosionSound.currentTime = 0; // Reset sound to start
+      explosionSound.play(); // Play explosion sound
+      hitSound.currentTime = 0; // Reset hit sound to start
+      hitSound.play(); // Play hit sound
+      enemy.remove();
+      projectile.remove();
+      updateScore();
     }
+  });
+}
+
   
     /***********************************************************/
     /*                Basic Rectangle Collision                */
