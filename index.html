@@ -493,9 +493,16 @@ function moveShip(offset) {
     }
   
     function switchWeapon(key) {
-      currentWeapon = key;
-      weaponDisplay.textContent = weapons[key].name;
-    }
+  console.log(`Switching to weapon key: ${key}`);
+  if (weapons[key]) {
+    currentWeapon = key;
+    weaponDisplay.textContent = weapons[key].name;
+    console.log(`Weapon switched to: ${weapons[key].name}`);
+  } else {
+    console.log(`Invalid weapon key: ${key}`);
+  }
+}
+
   
 /***********************************************************/
 /*                   Spawn Enemy Function                  */
