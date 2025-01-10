@@ -533,7 +533,8 @@ function spawnEnemy() {
 
    // if the enemy reaches bottom => health -1        
    enemy.addEventListener('animationend', () => {
-  if (!shieldActive && enemy.getBoundingClientRect().bottom >= window.innerHeight) {
+  const enemyBottom = enemy.getBoundingClientRect().bottom;
+  if (!shieldActive && enemyBottom >= window.innerHeight) {
     health -= 1;
     if (health <= 0) {
       endGame();
