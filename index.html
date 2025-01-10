@@ -781,23 +781,21 @@ initGame();
 /***********************************************************/
 function initGame() {
 
-    // Add mobile interaction listener
-    document.addEventListener('touchstart', function() {
-    if (!bgMusic.playing) {
-      bgMusic.play().catch(error => {
-        console.error('Error playing background music:', error);
-      });
-    }
-  }, { once: true });
+  function playBackgroundMusic() {
+  if (!bgMusic.playing) {
+    bgMusic.play().catch(error => {
+      console.error('Error playing background music:', error);
+    });
+  }
+}
 
-  // Add desktop interaction listener
-  document.addEventListener('keydown', function(event) {
-    if (event.code === 'Space' && !bgMusic.playing) {
-      bgMusic.play().catch(error => {
-        console.error('Error playing background music:', error);
-      });
-    }
-  }, { once: true });
+document.addEventListener('touchstart', playBackgroundMusic, { once: true });
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Space') {
+    playBackgroundMusic();
+  }
+}, { once: true });
+
 
   // Start spawning enemies
   enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
