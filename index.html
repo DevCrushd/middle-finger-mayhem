@@ -533,14 +533,15 @@ function spawnEnemy() {
 
    // if the enemy reaches bottom => health -1        
    enemy.addEventListener('animationend', () => {
-      if (enemy.getBoundingClientRect().bottom <= window.innerHeight) {
-        // Enemy has reached the bottom
-      if (!shieldActive) {
-        health -= 1    ;
-        if (health <= 0) endGame();
-        healthDisplay.textContent = health;
-      }
-    });
+  if (!shieldActive && enemy.getBoundingClientRect().bottom >= window.innerHeight) {
+    health -= 1;
+    if (health <= 0) {
+      endGame();
+    }
+    healthDisplay.textContent = health;
+  }
+  enemy.remove();
+});
   }
 }
 
