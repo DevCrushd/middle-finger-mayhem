@@ -430,32 +430,30 @@ document.addEventListener('touchend', (e) => {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
+  // Handle horizontal and vertical swipes
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
-    // Horizontal swipe
     if (deltaX > 0) {
       moveShip(20); // Swipe right
     } else {
       moveShip(-20); // Swipe left
     }
   } else {
-    // Vertical swipe
     if (deltaY > 0) {
       // Swipe down (optional, you can add functionality if needed)
     } else {
       // Swipe up (optional, you can add functionality if needed)
     }
   }
-  e.preventDefault(); // Prevent default behavior
-}, { passive: false });
 
-document.addEventListener('touchend', (e) => {
   // Detect tap to fire weapon
   const deltaTime = e.timeStamp - e.changedTouches[0].timeStamp;
   if (deltaTime < 300) {
     fireWeapon();
   }
+
   e.preventDefault(); // Prevent default behavior
 }, { passive: false });
+
 
 /***********************************************************/
 /*                       Move Ship                         */
