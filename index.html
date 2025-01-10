@@ -531,9 +531,10 @@ function spawnEnemy() {
     enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 5)) + 'vw'; // Changed from 50px to 5vw
     document.body.appendChild(enemy);
 
-    // if the enemy reaches bottom => health -1        
-    enemy.addEventListener('animationend', () => {
-      enemy.remove();
+   // if the enemy reaches bottom => health -1        
+   enemy.addEventListener('animationend', () => {
+      if (enemy.getBoundingClientRect().bottom <= window.innerHeight) {
+        // Enemy has reached the bottom
       if (!shieldActive) {
         health -= 1    ;
         if (health <= 0) endGame();
