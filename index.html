@@ -141,6 +141,13 @@
   text-shadow: 0.1vh 0.1vh 0.2vh #000; /* Adjusted from 1px 1px 2px to vh units */
 }
 
+/* Adjust position for mobile devices */
+@media (max-width: 600px) {
+  .explosion {
+    top: 20vh; /* Position the quotes lower on the screen */
+  }
+}
+
 @keyframes explode {
   0%   { opacity: 1; transform: scale(1);   }
   50%  { opacity: 1; transform: scale(1.4); }
