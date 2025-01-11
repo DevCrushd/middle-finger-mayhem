@@ -39,14 +39,14 @@
 }
 
 /* Random tinted color overlay behind starfield */
-#colorOverlay {
+/*#colorOverlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: -2;
   mix-blend-mode: screen;
   pointer-events: none;
-}
+}*/
 
 
    /***********************************************************/
@@ -297,9 +297,9 @@
     /***********************************************************/
     /*                Random Color Overlay Setup               */
     /***********************************************************/
-    const randomColors = ['#0ff', '#f0f', '#ff0', '#f80', '#08f', '#80f'];
+    /*const randomColors = ['#0ff', '#f0f', '#ff0', '#f80', '#08f', '#80f'];
     const pickedColor  = randomColors[Math.floor(Math.random() * randomColors.length)];
-    colorOverlay.style.backgroundColor = pickedColor;
+    colorOverlay.style.backgroundColor = pickedColor;*/
   
     bgMusic.volume = 0.2;
     bgMusic.play();
