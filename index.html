@@ -654,6 +654,11 @@ function createExplosion(x, y) {
   // Convert x and y to viewport units
   const xInVw = (x / window.innerWidth) * 100;
   const yInVh = (y / window.innerHeight) * 100;
+
+  // Ensure the explosion does not appear too close to the top
+  if (yInVh < 20) {
+    yInVh = 20; // Set a minimum top value
+  }
   
   explosion.style.left = xInVw + 'vw';
   explosion.style.top  = yInVh + 'vh';
