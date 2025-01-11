@@ -14,7 +14,8 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: url('https://crushdfitness.com/pics/potty.png') no-repeat center center fixed; /* Replace with your image URL */
+      background: url('https://crushdfitness.com/pics/potty.png') no-repeat center center; /* Replace with your image URL */
+      background-attachment: fixed;
       background-size: cover; /* Ensure the background covers the entire screen */
       font-family: 'Press Start 2P', cursive;
       color: #0f0; /* bright green text for scoreboard and such */
@@ -24,7 +25,7 @@
 @media (max-width: 600px) {
   body {
     background-attachment: scroll; /* Prevent background fixed issue on mobile */
-    background-size: contain;
+    background-size: cover;
   }
 }
 
